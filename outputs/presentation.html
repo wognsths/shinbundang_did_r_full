@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>신분당선 강남–신사 연장 개통의 교통·상권 재배치 효과</title>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/theme/white.css" id="theme">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+
+  <style>
+    :root{
+      --navy:#1a2a4f;
+      --accent:#2c5f8a;
+      --accent2:#c2410c;
+      --grey:#5b6472;
+      --line:#e2e6ec;
+      --bg:#ffffff;
+    }
+    .reveal{
+      font-family:'Pretendard','Apple SD Gothic Neo',sans-serif;
+      font-size:30px;
+      color:#1d2330;
+    }
+    .reveal .slides{ text-align:left; }
+    .reveal section{ height:100%; }
+
+    /* Headings */
+    .reveal h1,.reveal h2,.reveal h3{
+      font-family:'Pretendard',sans-serif;
+      color:var(--navy);
+      font-weight:700;
+      text-transform:none;
+      letter-spacing:-0.01em;
+      line-height:1.25;
+    }
+    .reveal h2{ font-size:1.45em; margin-bottom:.15em; }
+    .reveal h3{ font-size:1.05em; color:var(--accent); }
+
+    /* Slide title with rule */
+    .slide-title{
+      border-bottom:3px solid var(--navy);
+      padding-bottom:.12em;
+      margin-bottom:.55em;
+    }
+    .kicker{
+      font-size:.6em; color:var(--accent2); font-weight:700;
+      letter-spacing:.06em; margin-bottom:.1em; text-transform:uppercase;
+    }
+
+    /* Body */
+    .reveal p,.reveal li{ line-height:1.45; color:#2a3242; }
+    .reveal ul{ margin-left:.4em; }
+    .reveal li{ margin:.28em 0; }
+    .reveal strong{ color:var(--navy); }
+    .reveal em{ color:var(--accent2); font-style:normal; font-weight:600; }
+    .muted{ color:var(--grey); }
+    .small{ font-size:.78em; }
+    .tiny{ font-size:.62em; }
+
+    /* Tables */
+    .reveal table{ font-size:.74em; border-collapse:collapse; margin:.2em 0; width:100%; }
+    .reveal table th{
+      background:var(--navy); color:#fff; font-weight:600;
+      padding:.32em .6em; text-align:left; border:none;
+    }
+    .reveal table td{
+      padding:.3em .6em; border-bottom:1px solid var(--line); color:#2a3242;
+    }
+    .reveal table tr:last-child td{ border-bottom:1px solid var(--navy); }
+    .num{ text-align:right; font-variant-numeric:tabular-nums; }
+    .neg{ color:#b91c1c; font-weight:600; }
+    .pos{ color:#15803d; font-weight:600; }
+    .sig{ font-weight:700; }
+
+    /* Layout helpers */
+    .cols{ display:flex; gap:1.1em; align-items:center; }
+    .cols.top{ align-items:flex-start; }
+    .col{ flex:1; min-width:0; }
+    .fig{ text-align:center; }
+    .fig img{
+      max-height:560px; width:auto; border:1px solid var(--line);
+      border-radius:6px; box-shadow:0 2px 10px rgba(20,30,50,.08);
+      background:#fff;
+    }
+    .figcap{ font-size:.58em; color:var(--grey); margin-top:.35em; }
+
+    .callout{
+      background:#f4f7fb; border-left:5px solid var(--accent);
+      padding:.55em .85em; border-radius:4px; margin:.4em 0;
+      font-size:.85em;
+    }
+    .callout.warn{ background:#fff6f0; border-left-color:var(--accent2); }
+    .keyline{
+      background:var(--navy); color:#fff; padding:.55em .9em;
+      border-radius:6px; font-weight:600; font-size:.9em; line-height:1.4;
+    }
+    .keyline em{ color:#ffd27a; }
+    .keyline strong{ color:#ffffff; }
+
+    .pill{
+      display:inline-block; background:#eef2f8; color:var(--accent);
+      border:1px solid #d4ddea; border-radius:999px;
+      padding:.06em .6em; font-size:.62em; font-weight:600; margin-right:.3em;
+    }
+
+    /* Footer / page number */
+    .reveal .slide-number{ background:transparent; color:var(--grey); font-size:.5em; }
+    .footer{
+      position:absolute; bottom:14px; left:40px; right:40px;
+      font-size:.42em; color:#9aa3b2; display:flex; justify-content:space-between;
+      border-top:1px solid var(--line); padding-top:6px;
+    }
+
+    /* Title slide */
+    .title-slide{ text-align:center; }
+    .title-slide h1{ font-size:1.85em; line-height:1.3; margin-bottom:.25em; }
+    .title-slide .sub{ font-size:.95em; color:var(--accent); font-weight:600; }
+    .title-bar{
+      width:90px; height:5px; background:var(--accent2);
+      margin:.7em auto .9em; border-radius:3px;
+    }
+    .title-meta{ font-size:.62em; color:var(--grey); margin-top:1.4em; line-height:1.7; }
+    .badge-row{ margin:.6em 0; }
+
+    .reveal section img.icon{ vertical-align:middle; }
+  </style>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+
+  <!-- 1. TITLE -->
+  <section class="title-slide" data-background-color="#ffffff">
+    <div class="kicker" style="text-align:center;color:var(--accent2);">Difference-in-Differences 분석</div>
+    <h1>신분당선 강남–신사 연장 개통의<br>교통·상권 <em>재배치</em> 효과 분석</h1>
+    <div class="title-bar"></div>
+    <div class="sub">총수요 증가인가, 기존 흐름과 소비 구성의 재배치인가?</div>
+    <div class="title-meta">
+      개통일 2022.05.28 &nbsp;·&nbsp; 분석기간 지하철 2018–2024 / 상권 2019–2024<br>
+      DID · Synthetic Control · DAG 기반 통제변수 선택<br>
+      2026-05-30
+    </div>
+  </section>
+
+  <!-- 2. ROUTE MAP -->
+  <section data-background-color="#ffffff">
+    <div class="kicker">Background · Route</div>
+    <h2 class="slide-title">신분당선과 2022년 강남–신사 연장</h2>
+    <div class="fig" style="margin:.1em 0">
+      <svg viewBox="0 0 1180 340" style="width:100%;max-height:452px" font-family="'Pretendard',sans-serif">
+        <!-- analysis brackets -->
+        <path d="M58 92 L58 80 L300 80 L300 92" fill="none" stroke="#c2410c" stroke-width="2"/>
+        <text x="179" y="70" text-anchor="middle" font-size="15" font-weight="700" fill="#c2410c">분석 ① 지하철·상권 (강남권)</text>
+        <path d="M551 92 L551 80 L706 80 L706 92" fill="none" stroke="#2c5f8a" stroke-width="2"/>
+        <text x="628" y="70" text-anchor="middle" font-size="14" font-weight="700" fill="#2c5f8a">분석 ② 경기도 활동인구</text>
+
+        <!-- 2022 halo -->
+        <line x1="70" y1="200" x2="281" y2="200" stroke="#ffe1b0" stroke-width="20" stroke-linecap="round"/>
+        <!-- line segments -->
+        <line x1="70" y1="200" x2="281" y2="200" stroke="#e8820a" stroke-width="11" stroke-linecap="round"/>
+        <line x1="281" y1="200" x2="634" y2="200" stroke="#d4003b" stroke-width="8" stroke-linecap="round"/>
+        <line x1="634" y1="200" x2="1127" y2="200" stroke="#8a1a3a" stroke-width="8" stroke-linecap="round"/>
+
+        <!-- treated existing-line badges -->
+        <g font-size="12" font-weight="700" text-anchor="middle">
+          <rect x="59" y="171" width="22" height="17" rx="4" fill="#EF7C1C"/><text x="70" y="184" fill="#fff">3</text>
+          <rect x="129" y="171" width="22" height="17" rx="4" fill="#6e7500"/><text x="140" y="184" fill="#fff">7</text>
+          <rect x="200" y="171" width="22" height="17" rx="4" fill="#aa9872"/><text x="211" y="184" fill="#fff">9</text>
+          <rect x="270" y="171" width="22" height="17" rx="4" fill="#00A84D"/><text x="281" y="184" fill="#fff">2</text>
+        </g>
+
+        <!-- gold rings on treated stations -->
+        <g fill="none" stroke="#e8820a" stroke-width="2">
+          <circle cx="70" cy="200" r="11"/><circle cx="140" cy="200" r="11"/><circle cx="211" cy="200" r="11"/><circle cx="281" cy="200" r="11"/>
+        </g>
+
+        <!-- station dots -->
+        <g fill="#ffffff" stroke-width="3">
+          <circle cx="70"  cy="200" r="7" stroke="#e8820a"/>
+          <circle cx="140" cy="200" r="7" stroke="#e8820a"/>
+          <circle cx="211" cy="200" r="7" stroke="#e8820a"/>
+          <circle cx="281" cy="200" r="7" stroke="#d4003b"/>
+          <circle cx="352" cy="200" r="6" stroke="#d4003b"/>
+          <circle cx="422" cy="200" r="6" stroke="#d4003b"/>
+          <circle cx="493" cy="200" r="6" stroke="#d4003b"/>
+          <circle cx="563" cy="200" r="7" stroke="#d4003b"/>
+          <circle cx="634" cy="200" r="7" stroke="#d4003b"/>
+          <circle cx="704" cy="200" r="7" stroke="#8a1a3a"/>
+          <circle cx="775" cy="200" r="6" stroke="#8a1a3a"/>
+          <circle cx="845" cy="200" r="6" stroke="#8a1a3a"/>
+          <circle cx="916" cy="200" r="6" stroke="#8a1a3a"/>
+          <circle cx="986" cy="200" r="6" stroke="#8a1a3a"/>
+          <circle cx="1057" cy="200" r="6" stroke="#8a1a3a"/>
+          <circle cx="1127" cy="200" r="6" stroke="#8a1a3a"/>
+        </g>
+
+        <!-- station labels (rotated) -->
+        <g font-size="13.5" text-anchor="start">
+          <text transform="rotate(38 70 214)"   x="70"   y="214" fill="#c2410c" font-weight="700">신사</text>
+          <text transform="rotate(38 140 214)"  x="140"  y="214" fill="#c2410c" font-weight="700">논현</text>
+          <text transform="rotate(38 211 214)"  x="211"  y="214" fill="#c2410c" font-weight="700">신논현</text>
+          <text transform="rotate(38 281 214)"  x="281"  y="214" fill="#c2410c" font-weight="700">강남</text>
+          <text transform="rotate(38 352 214)"  x="352"  y="214" fill="#6b7280">양재</text>
+          <text transform="rotate(38 422 214)"  x="422"  y="214" fill="#6b7280">양재시민의숲</text>
+          <text transform="rotate(38 493 214)"  x="493"  y="214" fill="#6b7280">청계산입구</text>
+          <text transform="rotate(38 563 214)"  x="563"  y="214" fill="#2c5f8a" font-weight="700">판교</text>
+          <text transform="rotate(38 634 214)"  x="634"  y="214" fill="#2c5f8a" font-weight="700">정자</text>
+          <text transform="rotate(38 704 214)"  x="704"  y="214" fill="#2c5f8a" font-weight="700">미금</text>
+          <text transform="rotate(38 775 214)"  x="775"  y="214" fill="#6b7280">동천</text>
+          <text transform="rotate(38 845 214)"  x="845"  y="214" fill="#6b7280">수지구청</text>
+          <text transform="rotate(38 916 214)"  x="916"  y="214" fill="#6b7280">성복</text>
+          <text transform="rotate(38 986 214)"  x="986"  y="214" fill="#6b7280">상현</text>
+          <text transform="rotate(38 1057 214)" x="1057" y="214" fill="#6b7280">광교중앙</text>
+          <text transform="rotate(38 1127 214)" x="1127" y="214" fill="#6b7280">광교</text>
+        </g>
+
+        <!-- opening-phase pills -->
+        <g font-size="13" font-weight="700" text-anchor="middle">
+          <rect x="100" y="294" width="150" height="26" rx="13" fill="#e8820a"/><text x="175" y="311" fill="#fff">2022.05 · 강남–신사 ✦</text>
+          <rect x="382" y="294" width="150" height="26" rx="13" fill="#d4003b"/><text x="457" y="311" fill="#fff">2011.10 · 강남–정자</text>
+          <rect x="805" y="294" width="150" height="26" rx="13" fill="#8a1a3a"/><text x="880" y="311" fill="#fff">2016.01 · 정자–광교</text>
+        </g>
+      </svg>
+    </div>
+    <div class="keyline" style="font-size:.78em;line-height:1.4">2022.05.28 <em>강남–신사</em> 연장(신논현·논현·신사 신설)으로 기존 강남권 노선·상권에 새 접근 경로가 추가 → 본 분석의 <em>처치(treatment)</em>. 처치 역–노선은 환승·인접 <strong>2·3·7·9호선</strong>, 남부 원 corridor는 경기도 보조 분석 대상.</div>
+    <div class="footer"><span>신분당선 연장 DID 분석</span><span>2 / 13</span></div>
+  </section>
+
+  <!-- 3. RESEARCH QUESTION -->
+  <section data-background-color="#ffffff">
+    <div class="kicker">Research Question</div>
+    <h2 class="slide-title">무엇을 묻는가</h2>
+    <div class="cols top">
+      <div class="col" style="flex:1.15">
+        <p class="small">신분당선 강남–신사 연장은 강남권 내부 이동과 수도권 남부–강남 접근성을 동시에 바꾼 사건이다. 단순히 새 수요를 만들었을 수도, 기존 흐름을 <strong>재배치</strong>했을 수도 있다.</p>
+        <ul class="small">
+          <li>① 개통 후 기존 환승·인접역의 <strong>기존 노선 이용량</strong>은 통제역 대비 어떻게 변했나?</li>
+          <li>② 이용량 변화는 야간·여가보다 <strong>출퇴근 방향 흐름</strong>에서 더 뚜렷한가?</li>
+          <li>③ 상권 효과는 <strong>총매출 증가</strong>인가, secondary corridor의 <strong>소비자 구성 변화</strong>인가?</li>
+        </ul>
+      </div>
+      <div class="col">
+        <div class="keyline">
+          핵심 주장<br>
+          <span style="font-weight:400;font-size:.92em">개통 효과는 “강남권 총수요 증가”보다<br><em>기존 통근 흐름과 소비 구성의 재배치</em>로 읽는 것이 더 방어적이다.</span>
+        </div>
+        <p class="tiny muted" style="margin-top:.6em">지하철 = main evidence · 상권/경기도 API = 보조·탐색적 evidence</p>
+      </div>
+    </div>
+    <div class="footer"><span>신분당선 연장 DID 분석</span><span>3 / 13</span></div>
+  </section>
+
+  <!-- 4. DATA COLLECTION -->
+  <section data-background-color="#ffffff">
+    <div class="kicker">Data Collection</div>
+    <h2 class="slide-title">자료는 어떻게 모았나</h2>
+    <div class="cols top">
+      <div class="col" style="flex:1.35">
+        <table>
+          <tr><th>자료</th><th>출처</th><th>관측 단위</th><th>기간</th></tr>
+          <tr><td>지하철 승하차</td><td>서울 공개데이터<br><span class="tiny muted">(서울교통공사)</span></td><td>역–노선 · 시간대 · 일</td><td>2018–24</td></tr>
+          <tr><td>상권 추정매출</td><td>서울시 상권분석<br>서비스</td><td>행정동 · 분기<br><span class="tiny muted">연령·성별·시간대 분해</span></td><td>2019–24</td></tr>
+          <tr><td>버스 승하차</td><td>서울 공개데이터</td><td>정류장–노선 · 시간대 · 월</td><td>2019–24</td></tr>
+          <tr><td>생활인구</td><td>서울시 생활인구</td><td>행정동 · 시간대 · 월</td><td>2021–24</td></tr>
+          <tr><td>활동(유동)인구</td><td>경기도데이터드림<br>OpenAPI</td><td>행정동 · 요일/시간대 · 일</td><td>2018–25</td></tr>
+        </table>
+      </div>
+      <div class="col">
+        <h3>수집 → 정제 → 패널</h3>
+        <ul class="small">
+          <li>모두 <strong>공개 빅데이터</strong>를 API·다운로드로 수집</li>
+          <li><strong>역–노선–월</strong> / <strong>행정동–분기</strong> 등 DID 패널로 재구성 <span class="tiny muted">(outputs/processed/)</span></li>
+          <li>treated/control 라벨 부여, 로그·비중(연령·성별·시간대) 지표 산출</li>
+          <li>개통월 <strong>2022.05를 transition으로 제외</strong>, post = 2022.06~ (상권 2022.3Q~)</li>
+        </ul>
+        <div class="callout small">신규역 자체가 아니라 <em>기존 노선·상권</em>이 관측 단위 → 같은 기간 통제 단위와 나란히 패널화.</div>
+      </div>
+    </div>
+    <div class="footer"><span>신분당선 연장 DID 분석</span><span>4 / 13</span></div>
+  </section>
+
+  <!-- 5. DATA & DESIGN -->
+  <section data-background-color="#ffffff">
+    <div class="kicker">Data &amp; Design</div>
+    <h2 class="slide-title">자료와 분석 설계</h2>
+    <div class="cols top">
+      <div class="col">
+        <h3>처치 단위 = 역–노선 / 행정동</h3>
+        <table>
+          <tr><th>분석</th><th>Treated</th><th>Control</th></tr>
+          <tr><td>지하철<br><span class="tiny muted">월·역–노선</span></td><td class="small">2호선_강남, 9호선_신논현<br>7호선_논현, 3호선_신사</td><td class="small">강남·서초·인근<br>비교 역–노선 21개</td></tr>
+          <tr><td>상권<br><span class="tiny muted">분기·행정동</span></td><td class="small"><strong>Anchor</strong> 신사·역삼1동<br><strong>Secondary</strong> 논현1·서초4동</td><td class="small">강남·서초 내<br>local controls 14동</td></tr>
+          <tr><td>경기도<br><span class="tiny muted">월·행정동</span></td><td class="small">판교·정자·미금 축<br>10개 행정동</td><td class="small">분당구 내<br>다른 행정동</td></tr>
+        </table>
+      </div>
+      <div class="col">
+        <div class="callout small">
+          <strong>처치 단위가 핵심.</strong> 신규역 자체의 이용량이 아니라 <em>기존 노선</em>의 승하차·환승 흐름이 어떻게 바뀌었는지를 측정한다.
+        </div>
+        <p class="small"><span class="pill">POST</span>지하철 2022.06~ · 상권 2022.3Q~<br>
+        <span class="pill">제외</span>개통월(2022.05)·분기는 transition으로 drop</p>
+        <p class="small muted">강남·신사처럼 원래 강한 상권을 anchor/secondary로 나눠 “강남권 전체가 좋아졌나”가 아니라 <strong>층위별 반응 차이</strong>를 본다.</p>
+      </div>
+    </div>
+    <div class="footer"><span>신분당선 연장 DID 분석</span><span>5 / 13</span></div>
+  </section>
+
+  <!-- 4. METHOD: DID + DAG -->
+  <section data-background-color="#ffffff">
+    <div class="kicker">Method</div>
+    <h2 class="slide-title">DID &amp; DAG 기반 통제변수 선택</h2>
+    <div class="cols top">
+      <div class="col" style="flex:.92">
+        <div class="callout small" style="font-family:serif">
+          Y<sub>s,t</sub> = α<sub>s</sub> + λ<sub>t</sub> + β · (Treated<sub>s</sub> × Post<sub>t</sub>) + ε<sub>s,t</sub>
+        </div>
+        <p class="small">단위 고정효과 + 시점 고정효과 양방향 FE. 표준오차는 역–노선/행정동 단위 군집화.</p>
+        <h3>통제변수의 핵심 원칙</h3>
+        <ul class="small">
+          <li><strong>Pre-treatment 교란</strong>(중심성·pretrend·코로나·계절성) → 통제 ✔</li>
+          <li><strong>Post-treatment 변수</strong>(버스·생활인구·방문자·점포 구성) → 개통의 <em>결과 경로</em>이므로 통제하면 <em>bad control</em> → 별도 outcome으로 분석 ✗</li>
+        </ul>
+        <p class="tiny muted">Robustness: baseline×post, treated×코로나, 단위별 선형추세, Synthetic Control</p>
+      </div>
+      <div class="col fig">
+        <img src="control_robustness/figures/dag_identification.png" alt="DAG 기반 통제변수 선택 구조">
+        <div class="figcap">Figure 1 · DAG 기반 통제변수 선택 로직</div>
+      </div>
+    </div>
+    <div class="footer"><span>신분당선 연장 DID 분석</span><span>6 / 13</span></div>
+  </section>
+
+  <!-- 5. SUBWAY RESULT 1 -->
+  <section data-background-color="#ffffff">
+    <div class="kicker">Subway · Main Evidence</div>
+    <h2 class="slide-title">기존 노선 이용량은 감소했다</h2>
+    <div class="cols">
+      <div class="col">
+        <div class="keyline" style="margin-bottom:.5em">기존 환승·인접역 기존 노선 일평균 승하차량<br><span style="font-size:1.5em">−11.0%</span> <span style="font-weight:400;font-size:.8em">(p = 0.057)</span></div>
+        <ul class="small">
+          <li>Synthetic Control도 post 평균 gap <strong>−10.9%</strong>로 같은 방향 (pre-RMSPE 0.0166)</li>
+          <li>“전체 지하철 수요 감소”가 아니라 <em>기존 노선 흐름의 재배치</em>로 읽는 것이 자연스럽다</li>
+          <li>모든 robustness specification에서 <strong>음(−)의 방향 유지</strong></li>
+        </ul>
+        <p class="tiny muted">단위별 선형추세 추가 시 −8.2%로 다소 축소되나 부호 불변</p>
+      </div>
+      <div class="col fig">
+        <img src="figures/subway_trend_treated_control_2018_2024.png" alt="treated vs control 승하차량 추세">
+        <div class="figcap">Figure 3 · 기존 환승·인접역 vs 통제역 월별 일평균 승하차량 (점선=개통)</div>
+      </div>
+    </div>
+    <div class="footer"><span>신분당선 연장 DID 분석</span><span>7 / 13</span></div>
+  </section>
+
+  <!-- 6. SUBWAY RESULT 2: direction/timeband -->
+  <section data-background-color="#ffffff">
+    <div class="kicker">Subway · Direction &amp; Time</div>
+    <h2 class="slide-title">감소는 ‘출퇴근 흐름’에서 뚜렷하다</h2>
+    <div class="cols top">
+      <div class="col">
+        <table>
+          <tr><th>방향 · 시간대</th><th class="num">추정 효과</th><th class="num">p</th></tr>
+          <tr><td>출근시간 하차 07–10시</td><td class="num neg">−11.26%</td><td class="num sig">0.007</td></tr>
+          <tr><td>퇴근시간 승차 17–20시</td><td class="num neg">−9.79%</td><td class="num sig">0.029</td></tr>
+          <tr><td>야간 승차 21–24시</td><td class="num">−4.69%</td><td class="num muted">0.505</td></tr>
+          <tr><td>야간 하차 21–24시</td><td class="num">−1.60%</td><td class="num muted">0.842</td></tr>
+        </table>
+        <p class="small">출근 하차·퇴근 승차에서 기존 노선 감소가 <strong>유의하게 뚜렷</strong>, 야간은 무의미.</p>
+        <div class="callout small">단순 수요 위축이 아니라 <em>출퇴근 경로 재배치</em>의 신호. 주중(−10.9%, p=.043)이 주말(−11.7%, p=.143)보다 안정적.</div>
+      </div>
+      <div class="col fig">
+        <img src="commute_composition/figures/subway_direction_timeband_effects.png" alt="방향·시간대별 지하철 DID">
+        <div class="figcap">Figure 6 · 방향·시간대별 지하철 DID 추정치 (95% CI)</div>
+      </div>
+    </div>
+    <div class="footer"><span>신분당선 연장 DID 분석</span><span>8 / 13</span></div>
+  </section>
+
+  <!-- 7. COMMERCE 1: total sales unclear -->
+  <section data-background-color="#ffffff">
+    <div class="kicker">Commerce · Supporting Evidence</div>
+    <h2 class="slide-title">상권: 총매출 증가는 불명확</h2>
+    <div class="cols top">
+      <div class="col fig" style="flex:1.05">
+        <img src="anchor_secondary/figures/commerce_three_group_sales_trend.png" alt="anchor/secondary/control 매출 추세">
+        <div class="figcap">Figure 7 · Anchor · Secondary corridor · Control 매출 추세</div>
+      </div>
+      <div class="col">
+        <table>
+          <tr><th>Outcome</th><th class="num">전체 treated</th></tr>
+          <tr><td>총매출 로그</td><td class="num">−9.57% <span class="tiny muted">(.131)</span></td></tr>
+          <tr><td>거래건수 로그</td><td class="num">−10.60% <span class="tiny muted">(.132)</span></td></tr>
+          <tr><td>평균 결제단가</td><td class="num">+1.20% <span class="tiny muted">(.858)</span></td></tr>
+        </table>
+        <ul class="small">
+          <li>총매출·거래건수 <strong>증가하지 않음</strong>, 유의하지도 않음</li>
+          <li>상권 SC는 +1.39%로 약한 양(+) — 방향 엇갈림</li>
+          <li>행정동–분기 단위 + <strong>pretrend 검정이 약함</strong> → 지하철보다 해석 강도를 낮춰야</li>
+        </ul>
+        <div class="callout warn small">통제식에 민감 → “상권 총량 성장” 주장은 신중해야.</div>
+      </div>
+    </div>
+    <div class="footer"><span>신분당선 연장 DID 분석</span><span>9 / 13</span></div>
+  </section>
+
+  <!-- 8. COMMERCE 2: composition shift -->
+  <section data-background-color="#ffffff">
+    <div class="kicker">Commerce · Composition</div>
+    <h2 class="slide-title">대신 ‘소비자 구성’이 움직였다</h2>
+    <div class="cols top">
+      <div class="col">
+        <h3>Secondary corridor (논현1·서초4동)</h3>
+        <table>
+          <tr><th>Outcome</th><th class="num">효과(%p)</th><th class="num">p</th></tr>
+          <tr><td>20–30대 매출 비중</td><td class="num pos">+3.08</td><td class="num sig">0.004</td></tr>
+          <tr><td>40–50대 매출 비중</td><td class="num">−2.03</td><td class="num">0.080</td></tr>
+          <tr><td>50–60대+ 매출 비중</td><td class="num neg">−1.84</td><td class="num sig">0.001</td></tr>
+          <tr><td>거래건수</td><td class="num neg">−9.06</td><td class="num sig">0.004</td></tr>
+        </table>
+        <p class="small">anchor에서는 20–30대 변화 미미(+0.19%p), <strong>secondary corridor</strong>에서만 뚜렷 → 중간 corridor의 소비자 구성이 달라졌을 가능성.</p>
+        <p class="tiny muted">여러 outcome을 본 탐색적(heterogeneity) 분석 → multiple testing 유의, main claim보다 보조 근거로.</p>
+      </div>
+      <div class="col fig">
+        <img src="commute_composition/figures/commerce_secondary_age_gender_effects.png" alt="secondary corridor 연령·성별 소비 구성 DID">
+        <div class="figcap">Figure 8 · Secondary corridor 소비자 구성 DID 추정치</div>
+      </div>
+    </div>
+    <div class="footer"><span>신분당선 연장 DID 분석</span><span>10 / 13</span></div>
+  </section>
+
+  <!-- 9. AUXILIARY CHECKS -->
+  <section data-background-color="#ffffff">
+    <div class="kicker">Auxiliary Checks</div>
+    <h2 class="slide-title">보조 검증: 버스 · 생활인구 · 경기도 API</h2>
+    <div class="cols top">
+      <div class="col">
+        <ul class="small">
+          <li><strong>버스</strong> corridor 인근 정류장 총승하차 −3.4%(p=.241), 출근 하차 −6.25%(p=.064) → 출근 방향 재배치와 <em>같은 방향의 약한 증거</em></li>
+          <li><strong>생활인구</strong> secondary corridor 총량 −3.7%(p=.089), 20–30대 비중 +0.92%p(p=.006) → 머무는 사람의 <em>연령이 젊어짐</em></li>
+          <li><strong>경기도 API</strong> 원 신분당선 남부 corridor(판교·정자·미금) 활동인구 2021–22 창 +38.7%(p=.059)</li>
+        </ul>
+        <div class="callout warn small">경기도 API는 2023 전후 수준 변화 있어 <em>보조 검증</em>으로만. 거주자 증가가 아니라 활동량 증가 신호.</div>
+      </div>
+      <div class="col fig">
+        <img src="gyeonggi_activity/figures/gyeonggi_bundang_activity_trend.png" alt="경기도 원 신분당선 corridor 활동인구 추세">
+        <div class="figcap">Figure 12 · 분당구 원 신분당선 corridor vs 통제동 활동인구 추세</div>
+      </div>
+    </div>
+    <div class="footer"><span>신분당선 연장 DID 분석</span><span>11 / 13</span></div>
+  </section>
+
+  <!-- 10. SYNTHESIS -->
+  <section data-background-color="#1a2a4f">
+    <div class="kicker" style="color:#ffd27a">Synthesis</div>
+    <h2 class="slide-title" style="color:#fff;border-bottom-color:#ffd27a">종합 해석: ‘재배치’</h2>
+    <div style="color:#e9edf5">
+      <div class="cols">
+        <div class="col">
+          <p class="small" style="color:#cdd6e6"><strong style="color:#fff">지하철</strong><br>기존 노선 이용량 감소, 특히 출근 하차·퇴근 승차에서 뚜렷 → 기존 2·3·7·9호선 통근 흐름 일부를 신규 경로가 대체</p>
+        </div>
+        <div class="col">
+          <p class="small" style="color:#cdd6e6"><strong style="color:#fff">상권</strong><br>총매출 증가는 불명확, 거래건수는 감소. 그러나 secondary corridor에서 20–30대 비중 증가 → 총량보다 <em style="color:#ffd27a">소비 구성 변화</em></p>
+        </div>
+      </div>
+      <div class="keyline" style="background:#10203f;border:1px solid #3a4d77;margin-top:.7em;font-size:.95em;line-height:1.5">
+        신분당선 강남–신사 연장 개통의 주요 효과는 강남권 총 교통·상권 수요의 단순 증가라기보다,<br>
+        <em>기존 지하철 출퇴근 흐름과 secondary corridor의 소비 구성을 재배치한 효과</em>로 해석하는 것이 가장 방어적이다.
+      </div>
+    </div>
+    <div class="footer" style="color:#7e8aa3;border-top-color:#3a4d77"><span>신분당선 연장 DID 분석</span><span>12 / 13</span></div>
+  </section>
+
+  <!-- 11. LIMITATIONS & CONCLUSION -->
+  <section data-background-color="#ffffff">
+    <div class="kicker">Limitations &amp; Conclusion</div>
+    <h2 class="slide-title">한계와 결론</h2>
+    <div class="cols top">
+      <div class="col">
+        <h3>한계</h3>
+        <ul class="small">
+          <li>통제 배정이 무작위 아님 → <strong>parallel trends 가정</strong>에 의존</li>
+          <li>2020–21 코로나 충격이 pre-period에 포함 → event-study 해석 까다로움</li>
+          <li>상권 자료는 행정동–분기 단위 → 역세권 미세 공간효과 미포착, pretrend 약함</li>
+          <li>연령·성별은 exploratory → <strong>multiple testing</strong> 유의</li>
+          <li>경기도 API 2023 전후 수준 변화 → 전체기간 수치는 보조용</li>
+        </ul>
+      </div>
+      <div class="col">
+        <h3>결론</h3>
+        <div class="callout small">분석의 중심은 <em>상권 총량 확대</em>가 아니라 <strong>교통 경로 재배치 + 소비 구성 변화</strong>에 둔다.</div>
+        <ul class="small">
+          <li>지하철(main) 결과가 가장 강하고 robust</li>
+          <li>상권·경기도 API는 같은 방향의 <strong>보조·탐색 근거</strong></li>
+          <li>DAG로 post-treatment bad control을 분리해 해석의 인과 경로를 보존</li>
+        </ul>
+        <p class="tiny muted">향후: 거리 gradient·점포 단위 위치자료, 외부 시계열(날씨·행사·임대료) 확보 시 더 직접적 통제 가능</p>
+      </div>
+    </div>
+    <div class="footer"><span>신분당선 연장 DID 분석</span><span>13 / 13</span></div>
+  </section>
+
+</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/reveal.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/plugin/notes/notes.js"></script>
+<script>
+  Reveal.initialize({
+    hash:true,
+    slideNumber:false,
+    transition:'slide',
+    transitionSpeed:'fast',
+    width:1280,
+    height:720,
+    margin:0.06,
+    minScale:0.2,
+    maxScale:1.5,
+    plugins:[ RevealNotes ]
+  });
+</script>
+</body>
+</html>
