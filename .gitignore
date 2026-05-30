@@ -1,0 +1,38 @@
+# Secrets
+.Renviron
+.env
+*.key
+
+# Local files
+.DS_Store
+tmp/
+
+# Raw and heavy generated data
+data/raw/
+data/extracted/
+outputs/processed/
+
+# R / LaTeX build artifacts
+.Rhistory
+.RData
+*.log
+*.aux
+*.fdb_latexmk
+*.fls
+*.synctex.gz
+outputs/*.tex
+outputs/*.knit.md
+outputs/FINAL_REPORT_DRAFT_files/
+
+# Superseded or excluded report artifacts
+outputs/신분당선 도입효과.pdf
+outputs/tables/commerce_heterogeneity_2019_2024.csv
+outputs/creative_hypotheses/tables/creative_key_estimates.csv
+outputs/creative_hypotheses/figures/commerce_secondary_service_group_sales_effects.png
+outputs/creative_hypotheses/tables/commerce_secondary_service_group_did.csv
+outputs/less_central/figures/commerce_secondary_key_service_log_sales_effects.png
+outputs/less_central/tables/commerce_secondary_key_service_did.csv
+outputs/reallocation_extensions/figures/commerce_dining_nightlife_time_effects.png
+outputs/reallocation_extensions/tables/commerce_secondary_dining_nightlife_did.csv
+outputs/reallocation_extensions/tables/extension_key_estimates.csv
+outputs/*/*_REPORT.md

@@ -1,0 +1,13 @@
+﻿"domain","outcome","estimate","effect_scale","p_value"
+"subway","log average daily riders",-11.017309684970575,"percent",0.05685257833777756
+"subway_timeband","total",-11.017287550523614,"percent",0.05685179775468951
+"subway_timeband","morning_peak",-12.189976973405848,"percent",0.01147376688077461
+"subway_timeband","evening_peak",-9.88365817260398,"percent",0.07641113124962663
+"subway_timeband","late_night",-3.9506414343947305,"percent",0.5853876938617069
+"subway_timeband","daytime",-12.615989153205664,"percent",0.06424449914973403
+"commerce","log_sales",-9.570196328839597,"percent if log; share-point if share",0.1308230627808735
+"commerce","log_transactions",-10.638219079025667,"percent if log; share-point if share",0.13200609447977013
+"commerce","log_avg_ticket",1.195210154576709,"percent if log; share-point if share",0.8581693098591006
+"commerce","weekend_share",-0.00837882684665721,"percent if log; share-point if share",0.382246920296051
+"commerce","night_share",0.01407705699627486,"percent if log; share-point if share",0.04844613371306054
+"commerce","night_tx_share",0.00781177773452349,"percent if log; share-point if share",0.43496361166997977

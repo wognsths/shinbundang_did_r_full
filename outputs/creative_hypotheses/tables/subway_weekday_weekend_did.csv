@@ -1,0 +1,3 @@
+﻿"hypothesis","sample","outcome","term","coef","se","p_value","ci_low","ci_high","pct_effect_if_log","ci_low_pct_if_log","ci_high_pct_if_log","effect_pp_if_share","ci_low_pp_if_share","ci_high_pp_if_share","n_obs","n_units"
+"B_weekday_weekend","weekday","log_riders","did",-0.11532780675158531,0.05387968744963824,0.04268398699700239,-0.22653001617986124,-0.004125597323309374,-10.892600404662389,-20.270458980862138,-0.4117098737936309,NA,NA,NA,45125,25
+"B_weekday_weekend","weekend","log_riders","did",-0.1246763419026233,0.0822709093128549,0.14272287895824465,-0.29447515329725427,0.04512246949200763,-11.721742391919687,-25.507754502152903,4.615597425423501,NA,NA,NA,18025,25
