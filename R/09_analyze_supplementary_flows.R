@@ -1,5 +1,5 @@
 # ------------------------------------------------------------
-# 09_analyze_reallocation_extensions.R
+# 09_analyze_supplementary_flows.R
 # Extension hypotheses: bus substitution, living population, and dining/nightlife
 # ------------------------------------------------------------
 
@@ -7,7 +7,7 @@ source("R/01_utils.R")
 
 message("Analyzing reallocation extensions...")
 
-EXT_DIR <- file.path(OUT_DIR, "reallocation_extensions")
+EXT_DIR <- file.path(OUT_DIR, "supplementary_flows")
 EXT_TABLES <- file.path(EXT_DIR, "tables")
 EXT_FIGURES <- file.path(EXT_DIR, "figures")
 for (d in c(EXT_DIR, EXT_TABLES, EXT_FIGURES)) {
@@ -569,6 +569,6 @@ report_lines <- c(
   "거리 gradient와 창폐업 가설은 상권 또는 점포 단위 위치 자료와 창폐업 자료가 필요하다. 현재 행정동 단위 상권 패널만으로는 역으로부터의 거리별 효과를 방어적으로 추정하기 어렵다."
 )
 
-writeLines(report_lines, file.path(EXT_DIR, "REALLOCATION_EXTENSIONS_REPORT.md"), useBytes = TRUE)
+writeLines(report_lines, file.path(EXT_DIR, "SUPPLEMENTARY_FLOWS_REPORT.md"), useBytes = TRUE)
 
 message("Reallocation extension analysis complete.")

@@ -1,5 +1,5 @@
 # ------------------------------------------------------------
-# 11_analyze_dag_controls.R
+# 11_analyze_control_robustness.R
 # DAG-based control selection and DID robustness checks
 # ------------------------------------------------------------
 
@@ -7,7 +7,7 @@ source("R/01_utils.R")
 
 message("Analyzing DAG-based control robustness...")
 
-DAG_DIR <- file.path(OUT_DIR, "dag_controls")
+DAG_DIR <- file.path(OUT_DIR, "control_robustness")
 DAG_TABLES <- file.path(DAG_DIR, "tables")
 DAG_FIGURES <- file.path(DAG_DIR, "figures")
 for (d in c(DAG_DIR, DAG_TABLES, DAG_FIGURES)) {
@@ -481,13 +481,13 @@ report_lines <- c(
   "",
   "## Outputs",
   "",
-  "- `outputs/dag_controls/tables/dag_control_decisions.csv`",
-  "- `outputs/dag_controls/tables/all_control_robustness.csv`",
-  "- `outputs/dag_controls/tables/control_robustness_summary_for_report.csv`",
-  "- `outputs/dag_controls/figures/dag_identification.png`",
-  "- `outputs/dag_controls/figures/did_control_robustness.png`"
+  "- `outputs/control_robustness/tables/dag_control_decisions.csv`",
+  "- `outputs/control_robustness/tables/all_control_robustness.csv`",
+  "- `outputs/control_robustness/tables/control_robustness_summary_for_report.csv`",
+  "- `outputs/control_robustness/figures/dag_identification.png`",
+  "- `outputs/control_robustness/figures/did_control_robustness.png`"
 )
 
-writeLines(report_lines, file.path(DAG_DIR, "DAG_CONTROLS_REPORT.md"), useBytes = TRUE)
+writeLines(report_lines, file.path(DAG_DIR, "CONTROL_ROBUSTNESS_REPORT.md"), useBytes = TRUE)
 
 message("DAG control robustness complete.")

@@ -1,16 +1,16 @@
 # ------------------------------------------------------------
-# 07_analyze_less_central.R
+# 07_analyze_anchor_secondary.R
 # Anchor vs secondary-corridor commerce add-on analysis
 # ------------------------------------------------------------
 
 source("R/01_utils.R")
 
-message("Analyzing less-central commerce split...")
+message("Analyzing anchor-secondary commerce split...")
 
-LESS_CENTRAL_DIR <- file.path(OUT_DIR, "less_central")
-LESS_CENTRAL_TABLES <- file.path(LESS_CENTRAL_DIR, "tables")
-LESS_CENTRAL_FIGURES <- file.path(LESS_CENTRAL_DIR, "figures")
-for (d in c(LESS_CENTRAL_DIR, LESS_CENTRAL_TABLES, LESS_CENTRAL_FIGURES)) {
+AS_DIR <- file.path(OUT_DIR, "anchor_secondary")
+AS_TABLES <- file.path(AS_DIR, "tables")
+AS_FIGURES <- file.path(AS_DIR, "figures")
+for (d in c(AS_DIR, AS_TABLES, AS_FIGURES)) {
   dir.create(d, recursive = TRUE, showWarnings = FALSE)
 }
 
@@ -100,7 +100,7 @@ secondary_only_results <- fit_did(
 
 save_csv(
   secondary_only_results,
-  file.path(LESS_CENTRAL_TABLES, "commerce_secondary_only_did.csv")
+  file.path(AS_TABLES, "commerce_secondary_only_did.csv")
 )
 
 # 2) Anchor and secondary effects in one model.
@@ -132,7 +132,7 @@ split_results <- purrr::map_dfr(COMMERCE_OUTCOMES, function(y) {
 
 save_csv(
   split_results,
-  file.path(LESS_CENTRAL_TABLES, "commerce_anchor_vs_secondary_split_did.csv")
+  file.path(AS_TABLES, "commerce_anchor_vs_secondary_split_did.csv")
 )
 
 # 3) Single-dong DID against the same local controls.
@@ -163,7 +163,7 @@ single_dong_results <- purrr::map_dfr(seq_len(nrow(treated_lookup)), function(i)
 
 save_csv(
   single_dong_results,
-  file.path(LESS_CENTRAL_TABLES, "commerce_single_dong_did.csv")
+  file.path(AS_TABLES, "commerce_single_dong_did.csv")
 )
 
 # 4) Secondary-corridor heterogeneity by key service/category.
@@ -237,7 +237,7 @@ secondary_service_results <- service_category_panel %>%
 
 save_csv(
   secondary_service_results,
-  file.path(LESS_CENTRAL_TABLES, "commerce_secondary_key_service_did.csv")
+  file.path(AS_TABLES, "commerce_secondary_key_service_did.csv")
 )
 
 # Figures.
@@ -257,7 +257,7 @@ ggplot(three_group_trend, aes(qstr, mean_log_sales, group = group, linetype = gr
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 ggsave(
-  file.path(LESS_CENTRAL_FIGURES, "commerce_three_group_sales_trend.png"),
+  file.path(AS_FIGURES, "commerce_three_group_sales_trend.png"),
   width = 10,
   height = 5,
   dpi = 200
@@ -284,7 +284,7 @@ ggplot(service_sales_plot, aes(pct_effect_if_log, category)) +
   ) +
   theme_minimal()
 ggsave(
-  file.path(LESS_CENTRAL_FIGURES, "commerce_secondary_key_service_log_sales_effects.png"),
+  file.path(AS_FIGURES, "commerce_secondary_key_service_log_sales_effects.png"),
   width = 9,
   height = 5,
   dpi = 200
@@ -332,6 +332,6 @@ report_lines <- c(
   "The safer interpretation is that the Shinbundang extension is associated with changes in time-of-day and sector composition, with the Korean-restaurant result best treated as exploratory heterogeneity evidence."
 )
 
-writeLines(report_lines, file.path(LESS_CENTRAL_DIR, "LESS_CENTRAL_REPORT.md"))
+writeLines(report_lines, file.path(AS_DIR, "ANCHOR_SECONDARY_REPORT.md"))
 
 message("Less-central commerce split complete.")

@@ -1,16 +1,16 @@
 # ------------------------------------------------------------
-# 08_analyze_creative_hypotheses.R
-# Additional "reallocation" hypotheses for subway and commerce
+# 08_analyze_commute_composition.R
+# Commute-flow and consumer-composition analysis
 # ------------------------------------------------------------
 
 source("R/01_utils.R")
 
-message("Analyzing creative hypotheses...")
+message("Analyzing commute and composition patterns...")
 
-CREATIVE_DIR <- file.path(OUT_DIR, "creative_hypotheses")
-CREATIVE_TABLES <- file.path(CREATIVE_DIR, "tables")
-CREATIVE_FIGURES <- file.path(CREATIVE_DIR, "figures")
-for (d in c(CREATIVE_DIR, CREATIVE_TABLES, CREATIVE_FIGURES)) {
+COMP_DIR <- file.path(OUT_DIR, "commute_composition")
+COMP_TABLES <- file.path(COMP_DIR, "tables")
+COMP_FIGURES <- file.path(COMP_DIR, "figures")
+for (d in c(COMP_DIR, COMP_TABLES, COMP_FIGURES)) {
   dir.create(d, recursive = TRUE, showWarnings = FALSE)
 }
 
@@ -128,7 +128,7 @@ subway_direction_results <- purrr::map_dfr(seq_len(nrow(direction_specs)), funct
 }) %>%
   select(hypothesis, display, everything())
 
-save_csv(subway_direction_results, file.path(CREATIVE_TABLES, "subway_commute_direction_did.csv"))
+save_csv(subway_direction_results, file.path(COMP_TABLES, "subway_commute_direction_did.csv"))
 
 # Hypothesis B: weekday vs weekend subway reallocation.
 daily <- readr::read_csv(subway_daily_path, show_col_types = FALSE) %>%
@@ -161,7 +161,7 @@ subway_weekday_weekend_results <- purrr::map_dfr(c("weekday", "weekend"), functi
 }) %>%
   select(hypothesis, sample, everything())
 
-save_csv(subway_weekday_weekend_results, file.path(CREATIVE_TABLES, "subway_weekday_weekend_did.csv"))
+save_csv(subway_weekday_weekend_results, file.path(COMP_TABLES, "subway_weekday_weekend_did.csv"))
 
 # Commerce base panels.
 commerce_panel <- readr::read_csv(commerce_panel_path, show_col_types = FALSE) %>%
@@ -210,7 +210,7 @@ secondary_composition_results <- fit_one_term(
 ) %>%
   select(hypothesis, treated_group, everything())
 
-save_csv(secondary_composition_results, file.path(CREATIVE_TABLES, "commerce_secondary_consumption_composition_did.csv"))
+save_csv(secondary_composition_results, file.path(COMP_TABLES, "commerce_secondary_consumption_composition_did.csv"))
 
 # Hypothesis D: age/gender composition in the secondary corridor.
 age_gender_outcomes <- c("age20_30_share", "age40_50_share", "age50_60_share", "male_sales_share", "female_sales_share")
@@ -225,7 +225,7 @@ secondary_age_gender_results <- fit_one_term(
 ) %>%
   select(hypothesis, treated_group, everything())
 
-save_csv(secondary_age_gender_results, file.path(CREATIVE_TABLES, "commerce_secondary_age_gender_did.csv"))
+save_csv(secondary_age_gender_results, file.path(COMP_TABLES, "commerce_secondary_age_gender_did.csv"))
 
 # Hypothesis E: sector-specific secondary-corridor heterogeneity.
 service_panel <- readr::read_csv(service_panel_path, show_col_types = FALSE)
@@ -288,7 +288,7 @@ secondary_service_group_results <- service_groups %>%
   ungroup() %>%
   select(hypothesis, category, everything())
 
-save_csv(secondary_service_group_results, file.path(CREATIVE_TABLES, "commerce_secondary_service_group_did.csv"))
+save_csv(secondary_service_group_results, file.path(COMP_TABLES, "commerce_secondary_service_group_did.csv"))
 
 # Hypothesis F: split anchor vs secondary composition in one model.
 split_outcomes <- c("log_sales", "log_transactions", "log_avg_ticket", "age20_30_share", "male_sales_share", "female_sales_share")
@@ -306,7 +306,7 @@ anchor_secondary_split_results <- purrr::map_dfr(split_outcomes, function(y) {
 }) %>%
   select(hypothesis, group, everything())
 
-save_csv(anchor_secondary_split_results, file.path(CREATIVE_TABLES, "commerce_anchor_secondary_composition_split_did.csv"))
+save_csv(anchor_secondary_split_results, file.path(COMP_TABLES, "commerce_anchor_secondary_composition_split_did.csv"))
 
 # Combined key estimates table.
 key_estimates <- bind_rows(
@@ -325,7 +325,7 @@ key_estimates <- bind_rows(
     transmute(hypothesis, group, outcome, estimate = coalesce(pct_effect_if_log, effect_pp_if_share), effect_scale = if_else(startsWith(outcome, "log"), "percent", "percentage points"), p_value, source_table = "commerce_anchor_secondary_composition_split_did")
 )
 
-save_csv(key_estimates, file.path(CREATIVE_TABLES, "creative_key_estimates.csv"))
+save_csv(key_estimates, file.path(COMP_TABLES, "commute_composition_key_estimates.csv"))
 
 # Figures.
 direction_plot <- subway_direction_results %>%
@@ -349,7 +349,7 @@ ggplot(direction_plot, aes(pct_effect_if_log, reorder(plot_label, pct_effect_if_
   ) +
   labs(title = "Subway DID by direction and time band", x = "Percent effect", y = NULL) +
   theme_minimal()
-ggsave(file.path(CREATIVE_FIGURES, "subway_direction_timeband_effects.png"), width = 9, height = 4.8, dpi = 200)
+ggsave(file.path(COMP_FIGURES, "subway_direction_timeband_effects.png"), width = 9, height = 4.8, dpi = 200)
 
 ggplot(secondary_age_gender_results, aes(effect_pp_if_share, reorder(outcome, effect_pp_if_share))) +
   geom_vline(xintercept = 0, linetype = "dashed") +
@@ -361,7 +361,7 @@ ggplot(secondary_age_gender_results, aes(effect_pp_if_share, reorder(outcome, ef
   ) +
   labs(title = "Secondary corridor DID: consumer composition", x = "Percentage-point effect", y = NULL) +
   theme_minimal()
-ggsave(file.path(CREATIVE_FIGURES, "commerce_secondary_age_gender_effects.png"), width = 9, height = 4.8, dpi = 200)
+ggsave(file.path(COMP_FIGURES, "commerce_secondary_age_gender_effects.png"), width = 9, height = 4.8, dpi = 200)
 
 service_sales_plot <- secondary_service_group_results %>%
   filter(outcome == "log_sales") %>%
@@ -387,7 +387,7 @@ ggplot(service_sales_plot, aes(pct_effect_if_log, reorder(plot_label, pct_effect
   ) +
   labs(title = "Secondary corridor DID by service group: sales", x = "Percent effect", y = NULL) +
   theme_minimal()
-ggsave(file.path(CREATIVE_FIGURES, "commerce_secondary_service_group_sales_effects.png"), width = 9, height = 5.2, dpi = 200)
+ggsave(file.path(COMP_FIGURES, "commerce_secondary_service_group_sales_effects.png"), width = 9, height = 5.2, dpi = 200)
 
 # Report.
 row_one <- function(df, target_outcome, group_col = NULL, group_value = NULL) {
@@ -412,7 +412,7 @@ f_anchor_young <- row_one(anchor_secondary_split_results, "age20_30_share", "gro
 f_secondary_young <- row_one(anchor_secondary_split_results, "age20_30_share", "group", "secondary")
 
 report_lines <- c(
-  "# Creative hypotheses add-on",
+  "# Commute and composition analysis",
   "",
   "## Framing",
   "The additional analyses shift the commerce question from a simple total-sales effect to a reallocation question: did the Shinbundang extension rearrange existing subway flows and the internal composition of Gangnam-area commerce?",
@@ -437,6 +437,6 @@ report_lines <- c(
   "Age, gender, and service-group analyses are heterogeneity checks over multiple outcomes. They should be reported as exploratory evidence, not as the main causal claim."
 )
 
-writeLines(report_lines, file.path(CREATIVE_DIR, "CREATIVE_HYPOTHESES_REPORT.md"))
+writeLines(report_lines, file.path(COMP_DIR, "COMMUTE_COMPOSITION_REPORT.md"))
 
-message("Creative hypotheses analysis complete.")
+message("Commute and composition analysis complete.")

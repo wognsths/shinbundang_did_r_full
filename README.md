@@ -176,13 +176,13 @@ Rscript R/06_make_summary.R
 Anchor 상권과 secondary corridor 상권을 분리하는 보조 분석만 따로 실행하려면 다음을 실행합니다.
 
 ```bash
-Rscript run_less_central.R
+Rscript run_anchor_secondary.R
 ```
 
 교통 흐름·소비 구성 재배치 가설을 보는 추가 분석만 따로 실행하려면 다음을 실행합니다.
 
 ```bash
-Rscript run_creative_hypotheses.R
+Rscript run_commute_composition.R
 ```
 
 ---
@@ -260,7 +260,7 @@ Rscript run_creative_hypotheses.R
 
 ### 5.6 Anchor vs secondary corridor 보조 분석
 
-`outputs/less_central/`
+`outputs/anchor_secondary/`
 
 기존 강한 상권인 신사동·역삼1동을 anchor treated로, 논현1동·서초4동을 secondary corridor treated로 분리한 보조 분석입니다. 핵심 결과는 다음처럼 해석하는 것이 안전합니다.
 
@@ -268,7 +268,7 @@ Rscript run_creative_hypotheses.R
 
 ### 5.7 재배치 가설 추가 분석
 
-`outputs/creative_hypotheses/`
+`outputs/commute_composition/`
 
 상권 총량 효과보다 교통 흐름과 소비 구성의 재배치 여부를 보는 추가 분석입니다. 핵심은 다음입니다.
 
@@ -317,18 +317,18 @@ Rscript run_creative_hypotheses.R
 - `outputs/tables/commerce_did_robustness_2019_2024.csv`
 - `outputs/tables/commerce_scm_summary.csv`
 - `outputs/tables/combined_key_estimates_2019_2024.csv`
-- `outputs/less_central/tables/commerce_secondary_only_did.csv`
-- `outputs/less_central/tables/commerce_anchor_vs_secondary_split_did.csv`
-- `outputs/less_central/tables/commerce_single_dong_did.csv`
-- `outputs/creative_hypotheses/tables/subway_commute_direction_did.csv`
-- `outputs/creative_hypotheses/tables/subway_weekday_weekend_did.csv`
-- `outputs/creative_hypotheses/tables/commerce_secondary_consumption_composition_did.csv`
-- `outputs/creative_hypotheses/tables/commerce_secondary_age_gender_did.csv`
-- `outputs/creative_hypotheses/tables/commerce_anchor_secondary_composition_split_did.csv`
-- `outputs/dag_controls/tables/control_robustness_summary_for_report.csv`
-- `outputs/gyeonggi_api/tables/gyeonggi_bundang_day_dong_did.csv`
-- `outputs/reallocation_extensions/tables/bus_corridor_did.csv`
-- `outputs/reallocation_extensions/tables/living_secondary_did.csv`
+- `outputs/anchor_secondary/tables/commerce_secondary_only_did.csv`
+- `outputs/anchor_secondary/tables/commerce_anchor_vs_secondary_split_did.csv`
+- `outputs/anchor_secondary/tables/commerce_single_dong_did.csv`
+- `outputs/commute_composition/tables/subway_commute_direction_did.csv`
+- `outputs/commute_composition/tables/subway_weekday_weekend_did.csv`
+- `outputs/commute_composition/tables/commerce_secondary_consumption_composition_did.csv`
+- `outputs/commute_composition/tables/commerce_secondary_age_gender_did.csv`
+- `outputs/commute_composition/tables/commerce_anchor_secondary_composition_split_did.csv`
+- `outputs/control_robustness/tables/control_robustness_summary_for_report.csv`
+- `outputs/gyeonggi_activity/tables/gyeonggi_bundang_day_dong_did.csv`
+- `outputs/supplementary_flows/tables/bus_corridor_did.csv`
+- `outputs/supplementary_flows/tables/living_secondary_did.csv`
 
 ### Figures
 
@@ -338,13 +338,13 @@ Rscript run_creative_hypotheses.R
 - `outputs/figures/commerce_trend_sales_2019_2024.png`
 - `outputs/figures/commerce_event_study_log_sales_2019_2024.png`
 - `outputs/figures/commerce_event_study_night_share_2019_2024.png`
-- `outputs/less_central/figures/commerce_three_group_sales_trend.png`
-- `outputs/creative_hypotheses/figures/subway_direction_timeband_effects.png`
-- `outputs/creative_hypotheses/figures/commerce_secondary_age_gender_effects.png`
-- `outputs/dag_controls/figures/dag_identification.png`
-- `outputs/dag_controls/figures/did_control_robustness.png`
-- `outputs/reallocation_extensions/figures/bus_corridor_did_effects.png`
-- `outputs/reallocation_extensions/figures/living_secondary_composition_effects.png`
+- `outputs/anchor_secondary/figures/commerce_three_group_sales_trend.png`
+- `outputs/commute_composition/figures/subway_direction_timeband_effects.png`
+- `outputs/commute_composition/figures/commerce_secondary_age_gender_effects.png`
+- `outputs/control_robustness/figures/dag_identification.png`
+- `outputs/control_robustness/figures/did_control_robustness.png`
+- `outputs/supplementary_flows/figures/bus_corridor_did_effects.png`
+- `outputs/supplementary_flows/figures/living_secondary_composition_effects.png`
 
 ---
 

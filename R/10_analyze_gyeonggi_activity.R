@@ -1,5 +1,5 @@
 # ------------------------------------------------------------
-# 10_analyze_gyeonggi_api.R
+# 10_analyze_gyeonggi_activity.R
 # Gyeonggi API extension: original Shinbundang south-corridor activity population
 # ------------------------------------------------------------
 
@@ -7,7 +7,7 @@ source("R/01_utils.R")
 
 message("Analyzing Gyeonggi API activity-population extension...")
 
-GG_DIR <- file.path(OUT_DIR, "gyeonggi_api")
+GG_DIR <- file.path(OUT_DIR, "gyeonggi_activity")
 GG_TABLES <- file.path(GG_DIR, "tables")
 GG_FIGURES <- file.path(GG_DIR, "figures")
 for (d in c(GG_DIR, GG_TABLES, GG_FIGURES)) {
@@ -314,14 +314,14 @@ report <- c(
   "",
   "## Key Outputs",
   "",
-  "- `outputs/gyeonggi_api/tables/gyeonggi_bundang_day_dong_did.csv`",
-  "- `outputs/gyeonggi_api/tables/gyeonggi_bundang_window_robustness.csv`",
-  "- `outputs/gyeonggi_api/tables/gyeonggi_bundang_single_dong_did.csv`",
-  "- `outputs/gyeonggi_api/figures/gyeonggi_bundang_activity_trend.png`",
-  "- `outputs/gyeonggi_api/figures/gyeonggi_bundang_did_effects.png`",
-  "- `outputs/gyeonggi_api/figures/gyeonggi_bundang_single_dong_effects.png`"
+  "- `outputs/gyeonggi_activity/tables/gyeonggi_bundang_day_dong_did.csv`",
+  "- `outputs/gyeonggi_activity/tables/gyeonggi_bundang_window_robustness.csv`",
+  "- `outputs/gyeonggi_activity/tables/gyeonggi_bundang_single_dong_did.csv`",
+  "- `outputs/gyeonggi_activity/figures/gyeonggi_bundang_activity_trend.png`",
+  "- `outputs/gyeonggi_activity/figures/gyeonggi_bundang_did_effects.png`",
+  "- `outputs/gyeonggi_activity/figures/gyeonggi_bundang_single_dong_effects.png`"
 )
 
-writeLines(report, file.path(GG_DIR, "GYEONGGI_API_EXTENSION_REPORT.md"))
+writeLines(report, file.path(GG_DIR, "GYEONGGI_ACTIVITY_REPORT.md"))
 
 message("Gyeonggi API extension complete.")
