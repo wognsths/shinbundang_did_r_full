@@ -89,75 +89,78 @@ save_csv(pretrend_summary, file.path(ID_TABLES, "pretrend_diagnostic_summary.csv
 
 message("B. Running subway permutation inference...")
 
-subway_m <- readr::read_csv(
-  file.path(OUT_PROCESSED, "subway_monthly_panel_2018_2024.csv"),
-  show_col_types = FALSE
-) %>% mutate(month = as.Date(month))
+subway_panel_path <- file.path(OUT_PROCESSED, "subway_monthly_panel_2018_2024.csv")
+if (file.exists(subway_panel_path)) {
+  subway_m <- readr::read_csv(subway_panel_path, show_col_types = FALSE) %>%
+    mutate(month = as.Date(month))
 
-main <- subway_m %>% filter(transition == 0)
+  main <- subway_m %>% filter(transition == 0)
 
-actual_mod <- fixest::feols(
-  log_avg_daily_riders ~ did | station_line + month_str,
-  cluster = ~ station_line,
-  data = main
-)
-actual_beta <- fixest::coeftable(actual_mod)["did", "Estimate"]
-
-set.seed(20260601)
-n_perm <- 999
-all_stations <- unique(main$station_line)
-n_treated <- length(TREATED_STATIONS)
-perm_betas <- numeric(n_perm)
-
-for (i in seq_len(n_perm)) {
-  fake_treated <- sample(all_stations, n_treated)
-  perm_dat <- main %>%
-    mutate(
-      treated_perm = as.integer(station_line %in% fake_treated),
-      did_perm = treated_perm * post
-    )
-  perm_mod <- fixest::feols(
-    log_avg_daily_riders ~ did_perm | station_line + month_str,
+  actual_mod <- fixest::feols(
+    log_avg_daily_riders ~ did | station_line + month_str,
     cluster = ~ station_line,
-    data = perm_dat
+    data = main
   )
-  perm_betas[i] <- fixest::coeftable(perm_mod)["did_perm", "Estimate"]
-}
+  actual_beta <- fixest::coeftable(actual_mod)["did", "Estimate"]
 
-perm_p_twosided <- mean(abs(perm_betas) >= abs(actual_beta))
-perm_p_onesided <- mean(perm_betas <= actual_beta)
+  set.seed(20260601)
+  n_perm <- 999
+  all_stations <- unique(main$station_line)
+  n_treated <- length(TREATED_STATIONS)
+  perm_betas <- numeric(n_perm)
 
-save_csv(
-  tibble(
-    actual_beta = actual_beta,
-    actual_pct = pct_from_log(actual_beta),
-    n_permutations = n_perm,
-    perm_p_twosided = perm_p_twosided,
-    perm_p_onesided = perm_p_onesided,
-    perm_mean = mean(perm_betas),
-    perm_sd = sd(perm_betas),
-    conventional_p = fixest::coeftable(actual_mod)["did", "Pr(>|t|)"]
-  ),
-  file.path(ID_TABLES, "subway_permutation_pvalue.csv")
-)
+  for (i in seq_len(n_perm)) {
+    fake_treated <- sample(all_stations, n_treated)
+    perm_dat <- main %>%
+      mutate(
+        treated_perm = as.integer(station_line %in% fake_treated),
+        did_perm = treated_perm * post
+      )
+    perm_mod <- fixest::feols(
+      log_avg_daily_riders ~ did_perm | station_line + month_str,
+      cluster = ~ station_line,
+      data = perm_dat
+    )
+    perm_betas[i] <- fixest::coeftable(perm_mod)["did_perm", "Estimate"]
+  }
 
-ggplot(tibble(beta = perm_betas), aes(beta)) +
-  geom_histogram(bins = 50, fill = "grey70", color = "grey40") +
-  geom_vline(xintercept = actual_beta, color = "red", linewidth = 1) +
-  labs(
-    title = "Permutation distribution of subway DID coefficient",
-    subtitle = sprintf(
-      "Actual = %.4f (red line). Two-sided p = %.3f, one-sided p = %.3f",
-      actual_beta, perm_p_twosided, perm_p_onesided
+  perm_p_twosided <- mean(abs(perm_betas) >= abs(actual_beta))
+  perm_p_onesided <- mean(perm_betas <= actual_beta)
+
+  save_csv(
+    tibble(
+      actual_beta = actual_beta,
+      actual_pct = pct_from_log(actual_beta),
+      n_permutations = n_perm,
+      perm_p_twosided = perm_p_twosided,
+      perm_p_onesided = perm_p_onesided,
+      perm_mean = mean(perm_betas),
+      perm_sd = sd(perm_betas),
+      conventional_p = fixest::coeftable(actual_mod)["did", "Pr(>|t|)"]
     ),
-    x = "Permuted DID coefficient (log-points)",
-    y = "Count"
-  ) +
-  theme_minimal()
-ggsave(
-  file.path(ID_FIGURES, "subway_permutation_histogram.png"),
-  width = 9, height = 5, dpi = 200
-)
+    file.path(ID_TABLES, "subway_permutation_pvalue.csv")
+  )
+
+  ggplot(tibble(beta = perm_betas), aes(beta)) +
+    geom_histogram(bins = 50, fill = "grey70", color = "grey40") +
+    geom_vline(xintercept = actual_beta, color = "red", linewidth = 1) +
+    labs(
+      title = "Permutation distribution of subway DID coefficient",
+      subtitle = sprintf(
+        "Actual = %.4f (red line). Two-sided p = %.3f, one-sided p = %.3f",
+        actual_beta, perm_p_twosided, perm_p_onesided
+      ),
+      x = "Permuted DID coefficient (log-points)",
+      y = "Count"
+    ) +
+    theme_minimal()
+  ggsave(
+    file.path(ID_FIGURES, "subway_permutation_histogram.png"),
+    width = 9, height = 5, dpi = 200
+  )
+} else {
+  message("Skipping permutation inference: outputs/processed/ panel not available. Run R/02_prepare_subway.R first.")
+}
 
 # ============================================================
 # C. Control-set sensitivity summary

@@ -245,7 +245,7 @@ Permutation 결과는 `outputs/identification/tables/subway_permutation_pvalue.c
 
 **Pretrend 진단.** 상권 분석의 event-study pretrend Wald joint test는 모든 outcome에서 심각하게 기각된다: log_sales (p = 1.5 × 10⁻⁸), log_transactions (p = 1.4 × 10⁻⁸), night_share (p = 4.8 × 10⁻¹⁰), night_tx_share (p = 2.4 × 10⁻⁹). 이 수치는 parallel trends 가정이 상권 자료에서 충족되지 않음을 의미하며, 따라서 상권 DID 추정치에 대한 인과 해석에는 본질적 한계가 있다.
 
-야간 매출 비중의 p = 0.048은 특히 주의가 필요하다. Event-study 계수를 보면, pre-treatment 기간(2019Q1~2022Q1)의 계수가 이미 +0.015~+0.029로 일관되게 양수이다. 즉 treated 지역은 개통 전부터 control 대비 야간 매출 비중이 높았다. Post-treatment 계수(+0.027~+0.037)는 이 기존 차이의 연장이며, reference 시점(2022Q1)이 pre-treatment 중 가장 낮은 값이었기 때문에 DID가 유의하게 보이는 것이다. 따라서 야간 매출 비중의 "유의한" 결과는 pretrend artifact이며, 인과 효과로 해석할 수 없다.
+야간 매출 비중의 p = 0.048은 특히 주의가 필요하다. Event-study 계수를 보면, pre-treatment 기간(2019Q1~2022Q1)의 계수 13개가 모두 양수이다(범위: +0.002~+0.029, 대부분 +0.01 이상). 즉 treated 지역은 개통 전부터 control 대비 야간 매출 비중이 체계적으로 높았다. Post-treatment 계수(+0.027~+0.037)는 이 기존 차이의 연장이며, reference 시점(2022Q1)이 pre-treatment 중 가장 낮은 값이었기 때문에 DID가 유의하게 보이는 것이다. 따라서 야간 매출 비중의 "유의한" 결과는 pretrend artifact이며, 인과 효과로 해석할 수 없다.
 
 상권 synthetic control의 post 평균 gap은 +1.39%로 DID와 달리 약한 양의 방향이다. 그러나 상권 분석은 행정동-분기 단위이고 pretrend 문제가 크기 때문에, 지하철 분석보다 해석 강도를 낮춰야 한다.
 
