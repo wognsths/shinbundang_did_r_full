@@ -16,5 +16,6 @@ source("R/08_analyze_commute_composition.R")
 source("R/09_analyze_supplementary_flows.R")
 source("R/10_analyze_gyeonggi_activity.R")
 source("R/11_analyze_control_robustness.R")
+source("R/12_identification_diagnostics.R")
 
-message("All done. See outputs/tables, outputs/figures, outputs/anchor_secondary, outputs/commute_composition, outputs/supplementary_flows, outputs/gyeonggi_activity, outputs/control_robustness, and outputs/REPORT_SUMMARY.md")
+message("All done. See outputs/tables, outputs/figures, outputs/anchor_secondary, outputs/commute_composition, outputs/supplementary_flows, outputs/gyeonggi_activity, outputs/control_robustness, outputs/identification, and outputs/REPORT_SUMMARY.md")
