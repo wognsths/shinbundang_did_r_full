@@ -1,0 +1,6 @@
+﻿"variable","N_treated","N_obs_treated","mean_treated","sd_treated","N_control","N_obs_control","mean_control","sd_control","std_diff","balance_ok"
+"avg_daily_riders",4,160,82853.0559,57199.6032,21,840,38901.5421,31261.1371,0.9535,FALSE
+"avg_daily_board",4,160,40893.8534,28650.3316,21,840,19093.0859,15441.5948,0.9473,FALSE
+"avg_daily_alight",4,160,41959.2025,28560.9785,21,840,19808.4562,15930.5848,0.9579,FALSE
+"log_avg_daily_riders",4,160,11.1358,0.5841,21,840,10.1949,0.9309,1.2107,FALSE
+"boarding_share",4,160,0.4902,0.0099,21,840,0.4945,0.0349,-0.1645,TRUE
