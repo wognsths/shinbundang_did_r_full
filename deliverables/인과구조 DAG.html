@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>인과 구조 DAG — 신분당선 강남–신사 연장</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap">
+<style>
+  :root{
+    --paper:#f6f4ef; --paper-2:#efebe1; --ink:#211f1b; --ink-2:#6c665b;
+    --ink-3:#9b9487; --rule:#d8d2c4; --slate:#41506a; --slate-2:#5d6c87;
+    --slate-tint:#e6e7ec; --grey:#9b9487;
+  }
+  html,body{margin:0;height:100%;}
+  body{
+    background:#2a2722; display:flex; align-items:center; justify-content:center;
+    font-family:'Pretendard','Apple SD Gothic Neo',sans-serif; min-height:100vh;
+  }
+  .stage{ width:100vw; max-width:100vw; aspect-ratio:1280/720; max-height:100vh; }
+  svg{ width:100%; height:100%; display:block; }
+
+  /* SVG text classes */
+  .t-eyebrow{ font-size:15px; fill:var(--ink-2); font-weight:600; letter-spacing:.02em; }
+  .t-title{ font-family:'Noto Serif KR',serif; font-weight:600; font-size:30px; fill:var(--ink); }
+  .boxlabel{ font-size:13px; fill:var(--ink-2); font-weight:600; letter-spacing:.02em; }
+  .code{ font-family:'Source Serif 4',serif; font-weight:600; }
+  .ncode{ fill:var(--slate); font-size:16px; }
+  .ndesc{ fill:var(--ink); font-size:14.5px; font-weight:500; }
+  .nsub{ fill:var(--ink-2); font-size:11.5px; }
+  .t-on-slate .ncode{ fill:#fff; }
+  .t-on-slate .ndesc{ fill:#fff; }
+  .t-on-slate .nsub{ fill:var(--slate-on); }
+  .anno{ font-size:12px; fill:var(--ink-2); }
+  .anno b{ fill:var(--ink); }
+  .leg{ font-size:12.5px; fill:var(--ink); }
+  .ucode{ fill:var(--grey); }
+  .udesc{ fill:var(--ink-2); }
+</style>
+</head>
+<body>
+<div class="stage">
+<svg viewBox="0 0 1280 720" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="인과 구조 DAG">
+  <defs>
+    <marker id="ah-slate" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7.5" markerHeight="7.5" orient="auto-start-reverse">
+      <path d="M0,0.6 L9,5 L0,9.4 Z" fill="#41506a"></path>
+    </marker>
+    <marker id="ah-ink" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6.6" markerHeight="6.6" orient="auto-start-reverse">
+      <path d="M0,1 L8.5,5 L0,9 Z" fill="#6c665b"></path>
+    </marker>
+    <marker id="ah-light" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6.2" markerHeight="6.2" orient="auto-start-reverse">
+      <path d="M0,1 L8.5,5 L0,9 Z" fill="#b1a896"></path>
+    </marker>
+    <marker id="ah-grey" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6.4" markerHeight="6.4" orient="auto-start-reverse">
+      <path d="M0,1 L8.5,5 L0,9 Z" fill="#9b9487"></path>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="1280" height="720" fill="#f6f4ef"></rect>
+
+  <!-- ===== header ===== -->
+  <g>
+    <line x1="66" y1="58" x2="84" y2="58" stroke="#41506a" stroke-width="1.6"></line>
+    <text x="92" y="62" class="t-eyebrow">분석 설계와 식별 전략</text>
+    <text x="66" y="96" class="t-title">인과 구조와 통제 전략 (DAG)</text>
+  </g>
+
+  <!-- ===== legend (top-right) ===== -->
+  <g transform="translate(905,44)">
+    <line x1="0" y1="6" x2="40" y2="6" stroke="#41506a" stroke-width="3.2" marker-end="url(#ah-slate)"></line>
+    <text x="50" y="10" class="leg">주 인과 경로 (T → Y)</text>
+    <line x1="0" y1="30" x2="40" y2="30" stroke="#6c665b" stroke-width="1.6" marker-end="url(#ah-ink)"></line>
+    <text x="50" y="34" class="leg">교란 / 매개 경로</text>
+    <line x1="0" y1="54" x2="40" y2="54" stroke="#9b9487" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#ah-grey)"></line>
+    <text x="50" y="58" class="leg">미관측 교란 (U)</text>
+  </g>
+
+  <!-- ================= EDGES (drawn first, under nodes) ================= -->
+
+  <!-- confounder W -> T -->
+  <path d="M295,236 L373,292" fill="none" stroke="#6c665b" stroke-width="1.6" marker-end="url(#ah-ink)"></path>
+  <path d="M295,408 L373,316" fill="none" stroke="#6c665b" stroke-width="1.6" marker-end="url(#ah-ink)"></path>
+
+  <!-- confounder W -> Y (arc over the top, light) -->
+  <path d="M250,198 C 520,78 840,78 1090,184" fill="none" stroke="#b1a896" stroke-width="1.4" marker-end="url(#ah-light)"></path>
+  <path d="M268,378 C 560,150 880,140 1003,272" fill="none" stroke="#b1a896" stroke-width="1.4" marker-end="url(#ah-light)"></path>
+  <text x="676" y="96" text-anchor="middle" class="anno" font-style="italic">W → 각 Y에 작용</text>
+
+  <!-- Treatment -> Outcome (MAIN, slate bold) -->
+  <path d="M537,290 C 730,252 880,240 1001,232" fill="none" stroke="#41506a" stroke-width="3.2" marker-end="url(#ah-slate)"></path>
+  <path d="M537,305 C 740,312 880,318 1001,320" fill="none" stroke="#41506a" stroke-width="3.2" marker-end="url(#ah-slate)"></path>
+  <path d="M537,320 C 720,360 850,392 1001,408" fill="none" stroke="#41506a" stroke-width="3.2" marker-end="url(#ah-slate)"></path>
+
+  <!-- Treatment -> Mediator -->
+  <path d="M470,340 C 500,418 540,452 583,466" fill="none" stroke="#6c665b" stroke-width="1.6" marker-end="url(#ah-ink)"></path>
+  <path d="M495,340 C 560,412 668,444 730,466" fill="none" stroke="#6c665b" stroke-width="1.6" marker-end="url(#ah-ink)"></path>
+  <path d="M518,338 C 620,404 778,442 880,466" fill="none" stroke="#6c665b" stroke-width="1.6" marker-end="url(#ah-ink)"></path>
+
+  <!-- Mediator -> Outcome -->
+  <path d="M662,490 C 800,398 905,300 1001,244" fill="none" stroke="#6c665b" stroke-width="1.6" marker-end="url(#ah-ink)"></path>
+  <path d="M812,502 C 890,480 945,448 1001,418" fill="none" stroke="#6c665b" stroke-width="1.6" marker-end="url(#ah-ink)"></path>
+  <path d="M962,492 C 982,468 992,398 1003,336" fill="none" stroke="#6c665b" stroke-width="1.6" marker-end="url(#ah-ink)"></path>
+
+  <!-- Unobserved U -> T , U -> Y (grey dashed) -->
+  <path d="M292,614 C 338,548 360,432 398,344" fill="none" stroke="#9b9487" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#ah-grey)"></path>
+  <path d="M268,660 C 540,716 840,694 1006,440" fill="none" stroke="#9b9487" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#ah-grey)"></path>
+
+  <!-- ================= CLUSTER BOXES ================= -->
+  <!-- W cluster -->
+  <rect x="62" y="170" width="248" height="312" rx="7" fill="none" stroke="#b8b0a0" stroke-width="1.3" stroke-dasharray="6 5"></rect>
+  <text x="78" y="190" class="boxlabel">관측 교란요인 W (FE로 조정)</text>
+  <!-- M cluster -->
+  <rect x="500" y="450" width="478" height="150" rx="7" fill="none" stroke="#b8b0a0" stroke-width="1.3" stroke-dasharray="6 5"></rect>
+  <text x="516" y="470" class="boxlabel">매개 M (post-treatment, 통제하지 않음)</text>
+  <!-- Y cluster -->
+  <rect x="998" y="170" width="220" height="300" rx="7" fill="none" stroke="#c8cdd8" stroke-width="1.4"></rect>
+  <text x="1014" y="190" class="boxlabel" fill="#41506a">주 결과 Y</text>
+
+  <!-- ================= NODES ================= -->
+  <!-- W1 -->
+  <g>
+    <rect x="84" y="200" width="206" height="72" rx="6" fill="#efebe1" stroke="#cfc8b8" stroke-width="1.3"></rect>
+    <text x="98" y="228"><tspan class="code ncode">W₁</tspan><tspan class="ndesc" dx="8">역 / 동 고정 특성</tspan></text>
+    <text x="98" y="250" class="nsub">중심성, 토지이용, 기초상권역량</text>
+  </g>
+  <!-- W2 -->
+  <g>
+    <rect x="84" y="376" width="206" height="72" rx="6" fill="#efebe1" stroke="#cfc8b8" stroke-width="1.3"></rect>
+    <text x="98" y="404"><tspan class="code ncode">W₂</tspan><tspan class="ndesc" dx="8">공통 시간 충격</tspan></text>
+    <text x="98" y="426" class="nsub">계절성, 매크로, 코로나</text>
+  </g>
+
+  <!-- T -->
+  <g class="t-on-slate">
+    <rect x="373" y="266" width="164" height="76" rx="7" fill="#41506a"></rect>
+    <text x="455" y="296" text-anchor="middle"><tspan class="code" fill="#fff" font-size="17">T</tspan><tspan dx="7" fill="#fff" font-size="14.5" font-weight="600">강남–신사 연장 개통</tspan></text>
+    <text x="455" y="320" text-anchor="middle" fill="#c3cad8" font-size="12.5" font-family="'Source Serif 4',serif">2022.05, 처치(treatment)</text>
+  </g>
+
+  <!-- M1 / M2 / M3 -->
+  <g>
+    <rect x="515" y="478" width="146" height="48" rx="6" fill="#efebe1" stroke="#cfc8b8" stroke-width="1.3"></rect>
+    <text x="529" y="498"><tspan class="code ncode">M₁</tspan><tspan class="ndesc" dx="7" font-size="13.5">버스 이용량</tspan></text>
+    <text x="529" y="516" class="nsub">출근 방향 재배치</text>
+  </g>
+  <g>
+    <rect x="665" y="478" width="146" height="48" rx="6" fill="#efebe1" stroke="#cfc8b8" stroke-width="1.3"></rect>
+    <text x="679" y="498"><tspan class="code ncode">M₂</tspan><tspan class="ndesc" dx="7" font-size="13.5">생활인구·방문자</tspan></text>
+    <text x="679" y="516" class="nsub">머무는 인구 구성</text>
+  </g>
+  <g>
+    <rect x="815" y="478" width="146" height="48" rx="6" fill="#efebe1" stroke="#cfc8b8" stroke-width="1.3"></rect>
+    <text x="829" y="498"><tspan class="code ncode">M₃</tspan><tspan class="ndesc" dx="7" font-size="13.5">점포수·업종 구성</tspan></text>
+    <text x="829" y="516" class="nsub">공급 측 반응</text>
+  </g>
+
+  <!-- Y1 / Y2 / Y3 -->
+  <g>
+    <rect x="1010" y="198" width="196" height="56" rx="6" fill="#ffffff" stroke="#c8cdd8" stroke-width="1.4"></rect>
+    <text x="1026" y="222"><tspan class="code ncode">Y₁</tspan><tspan class="ndesc" dx="8">기존 노선 승하차량</tspan></text>
+    <text x="1026" y="241" class="nsub">지하철, 주 증거</text>
+  </g>
+  <g>
+    <rect x="1010" y="291" width="196" height="56" rx="6" fill="#ffffff" stroke="#c8cdd8" stroke-width="1.4"></rect>
+    <text x="1026" y="315"><tspan class="code ncode">Y₂</tspan><tspan class="ndesc" dx="8">상권 총매출</tspan></text>
+    <text x="1026" y="334" class="nsub">상권, 보조 증거</text>
+  </g>
+  <g>
+    <rect x="1010" y="384" width="196" height="56" rx="6" fill="#ffffff" stroke="#c8cdd8" stroke-width="1.4"></rect>
+    <text x="1026" y="408"><tspan class="code ncode">Y₃</tspan><tspan class="ndesc" dx="8">소비자 연령 구성</tspan></text>
+    <text x="1026" y="427" class="nsub">상권, 소비 구성</text>
+  </g>
+
+  <!-- U -->
+  <g>
+    <rect x="84" y="602" width="208" height="58" rx="6" fill="#f1eee7" stroke="#b8b0a0" stroke-width="1.3" stroke-dasharray="5 4"></rect>
+    <text x="98" y="628"><tspan class="code ucode" font-size="16">U</tspan><tspan class="udesc" dx="8" font-size="14" font-weight="500">미관측 충격</tspan></text>
+    <text x="98" y="648" class="nsub" fill="#9b9487">날씨, 이벤트, 공사</text>
+  </g>
+
+  <!-- ================= ANNOTATIONS ================= -->
+  <text x="78" y="500" class="anno" style="font-size:11.5px">
+    <tspan x="78" dy="0"><tspan class="anno" style="font-weight:600;fill:#211f1b">Unit FE, Time FE로 조정.</tspan> robustness에서</tspan>
+    <tspan x="78" dy="15">baseline×post, COVID 차등, 단위별 추세 추가 점검</tspan>
+  </text>
+
+  <text x="516" y="588" class="anno" style="font-size:11.5px">
+    <tspan class="anno" style="font-weight:600;fill:#211f1b">별도 outcome으로 분석</tspan>: post-treatment 변수를 통제하면 bad control
+  </text>
+</svg>
+</div>
+</body>
+</html>
