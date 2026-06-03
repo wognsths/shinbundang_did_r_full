@@ -6,10 +6,12 @@
 # Local files
 .DS_Store
 tmp/
+deliverables/
 
 # Raw and heavy generated data
 data/raw/
 data/extracted/
+data/CARD_SUBWAY_MONTH_*.csv
 outputs/processed/
 
 # R / LaTeX build artifacts
