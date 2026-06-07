@@ -116,6 +116,8 @@ shinbundang_did_r/
     ├── processed/
     ├── tables/
     ├── figures/
+    ├── balance/
+    ├── identification/
     └── REPORT_SUMMARY.md
 ```
 
@@ -304,6 +306,12 @@ Rscript run_commute_composition.R
 - `outputs/FINAL_REPORT_DRAFT.Rmd`
 - `outputs/REPORT_SUMMARY.md`
 
+### Presentation
+
+- `outputs/presentation.html`
+- `outputs/presentation.pdf`
+- `outputs/presentation_script.md`
+
 ### Tables
 
 - `outputs/tables/subway_did_main.csv`
@@ -317,6 +325,12 @@ Rscript run_commute_composition.R
 - `outputs/tables/commerce_did_robustness_2019_2024.csv`
 - `outputs/tables/commerce_scm_summary.csv`
 - `outputs/tables/combined_key_estimates_2019_2024.csv`
+- `outputs/balance/subway_pretreatment_balance.csv`
+- `outputs/balance/commerce_pretreatment_balance.csv`
+- `outputs/identification/tables/pretrend_diagnostic_summary.csv`
+- `outputs/identification/tables/subway_control_set_sensitivity.csv`
+- `outputs/identification/tables/subway_permutation_pvalue.csv`
+- `outputs/identification/tables/commerce_dong_heterogeneity.csv`
 - `outputs/anchor_secondary/tables/commerce_secondary_only_did.csv`
 - `outputs/anchor_secondary/tables/commerce_anchor_vs_secondary_split_did.csv`
 - `outputs/anchor_secondary/tables/commerce_single_dong_did.csv`
@@ -343,6 +357,7 @@ Rscript run_commute_composition.R
 - `outputs/commute_composition/figures/commerce_secondary_age_gender_effects.png`
 - `outputs/control_robustness/figures/dag_identification.png`
 - `outputs/control_robustness/figures/did_control_robustness.png`
+- `outputs/identification/figures/subway_permutation_histogram.png`
 - `outputs/supplementary_flows/figures/bus_corridor_did_effects.png`
 - `outputs/supplementary_flows/figures/living_secondary_composition_effects.png`
 

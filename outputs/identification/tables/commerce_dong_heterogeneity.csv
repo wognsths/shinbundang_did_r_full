@@ -1,0 +1,9 @@
+﻿"treated_group","treated_dong_name","outcome","pct_effect_if_log","p_value","n_obs"
+"anchor","신사동","log_sales",-16.438331135902562,0.002813680966081,345
+"anchor","신사동","log_transactions",-26.166691382824148,3.038155370687785e-8,345
+"anchor","역삼1동","log_sales",-6.114001016900062,0.2248047700338926,345
+"anchor","역삼1동","log_transactions",4.431021525974388,0.14025437921129374,345
+"secondary","논현1동","log_sales",-15.186428851374975,0.00510117169937513,345
+"secondary","논현1동","log_transactions",-8.585710545191706,0.00596317316822656,345
+"secondary","서초4동","log_sales",0.5016206884419061,0.9211997789590698,345
+"secondary","서초4동","log_transactions",-9.528598725412207,0.00283570968342373,345
