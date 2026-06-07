@@ -1,6 +1,6 @@
 ---
 title: "신분당선 강남-신사 연장 개통의 교통·상권 재배치 효과 분석"
-author: "DID 분석 보고서"
+author: "김성수 (Sungsu Kim, 2021122001) · 남경수 (Gyeongsu Nam, 2023147010) · 박성하 (Sungha Park, 2022122032) · 손재훈 (Jaehun Shon, 2021122006)"
 date: "`r format(Sys.Date(), '%Y-%m-%d')`"
 output:
   pdf_document:
